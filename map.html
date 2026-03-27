@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_1c8ff2a99f4b5d85de590b05837273c3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_1c8ff2a99f4b5d85de590b05837273c3" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_1c8ff2a99f4b5d85de590b05837273c3 = L.map(
+                "map_1c8ff2a99f4b5d85de590b05837273c3",
+                {
+                    center: [27.33, 88.61],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_8242dc35e14d008767b4a5f4dfadfed8 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_8242dc35e14d008767b4a5f4dfadfed8.addTo(map_1c8ff2a99f4b5d85de590b05837273c3);
+        
+    
+            var marker_66ffb65162bb3d01d2b2adf77d1c6ef3 = L.marker(
+                [27.3, 88.63],
+                {
+}
+            ).addTo(map_1c8ff2a99f4b5d85de590b05837273c3);
+        
+    
+            var icon_00c005234ede400cfc57aac22bf35ffd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1f1088dca9e4e7777ece47dd8078dfdc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8ebf4616ae30f409539906167801e676 = $(`<div id="html_8ebf4616ae30f409539906167801e676" style="width: 100.0%; height: 100.0%;">         <b>Phamrong Waterfalls</b><br>         Score: 0.607<br>         Crowd: low<br>         Themes: nature, offbeat, adventure         </div>`)[0];
+                popup_1f1088dca9e4e7777ece47dd8078dfdc.setContent(html_8ebf4616ae30f409539906167801e676);
+            
+        
+
+        marker_66ffb65162bb3d01d2b2adf77d1c6ef3.bindPopup(popup_1f1088dca9e4e7777ece47dd8078dfdc)
+        ;
+
+        
+    
+    
+                marker_66ffb65162bb3d01d2b2adf77d1c6ef3.setIcon(icon_00c005234ede400cfc57aac22bf35ffd);
+            
+    
+            var marker_27a51bdd1d0028ee176618705c491c10 = L.marker(
+                [27.28, 88.56],
+                {
+}
+            ).addTo(map_1c8ff2a99f4b5d85de590b05837273c3);
+        
+    
+            var icon_9614f97776bb9ba7754e82a56b1f5588 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d585de24d98ad6a1fdfbb01efa8897b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8f78ef5af4c186b1fbdd9ee20521d672 = $(`<div id="html_8f78ef5af4c186b1fbdd9ee20521d672" style="width: 100.0%; height: 100.0%;">         <b>Sajong</b><br>         Score: 0.572<br>         Crowd: low<br>         Themes: nature, cultural, offbeat         </div>`)[0];
+                popup_d585de24d98ad6a1fdfbb01efa8897b7.setContent(html_8f78ef5af4c186b1fbdd9ee20521d672);
+            
+        
+
+        marker_27a51bdd1d0028ee176618705c491c10.bindPopup(popup_d585de24d98ad6a1fdfbb01efa8897b7)
+        ;
+
+        
+    
+    
+                marker_27a51bdd1d0028ee176618705c491c10.setIcon(icon_9614f97776bb9ba7754e82a56b1f5588);
+            
+    
+            var marker_004c3ce94b39e5753a9b7ecc1f7b81bd = L.marker(
+                [27.28, 88.15],
+                {
+}
+            ).addTo(map_1c8ff2a99f4b5d85de590b05837273c3);
+        
+    
+            var icon_dc1be0a9c239a8ebcd30ad32249f790a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_92e9580fa9cca110b045c3e40dd61e49 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_588361eb45ff86754b229063b19456df = $(`<div id="html_588361eb45ff86754b229063b19456df" style="width: 100.0%; height: 100.0%;">         <b>Kaluk</b><br>         Score: 0.556<br>         Crowd: low<br>         Themes: adventure, nature, offbeat         </div>`)[0];
+                popup_92e9580fa9cca110b045c3e40dd61e49.setContent(html_588361eb45ff86754b229063b19456df);
+            
+        
+
+        marker_004c3ce94b39e5753a9b7ecc1f7b81bd.bindPopup(popup_92e9580fa9cca110b045c3e40dd61e49)
+        ;
+
+        
+    
+    
+                marker_004c3ce94b39e5753a9b7ecc1f7b81bd.setIcon(icon_dc1be0a9c239a8ebcd30ad32249f790a);
+            
+    
+            var marker_0976ba70844e8d6723ec2febf9dcf598 = L.marker(
+                [27.07, 88.82],
+                {
+}
+            ).addTo(map_1c8ff2a99f4b5d85de590b05837273c3);
+        
+    
+            var icon_6a6727ca2f36ff8a749bb30ee003eb56 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a58133bb070862149fe1d0bf3490a5c3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_74c0dd9cd4490117692afd8ec39157c5 = $(`<div id="html_74c0dd9cd4490117692afd8ec39157c5" style="width: 100.0%; height: 100.0%;">         <b>Zuluk & Kupup Lake</b><br>         Score: 0.542<br>         Crowd: low<br>         Themes: photography, nature, adventure, offbeat         </div>`)[0];
+                popup_a58133bb070862149fe1d0bf3490a5c3.setContent(html_74c0dd9cd4490117692afd8ec39157c5);
+            
+        
+
+        marker_0976ba70844e8d6723ec2febf9dcf598.bindPopup(popup_a58133bb070862149fe1d0bf3490a5c3)
+        ;
+
+        
+    
+    
+                marker_0976ba70844e8d6723ec2febf9dcf598.setIcon(icon_6a6727ca2f36ff8a749bb30ee003eb56);
+            
+    
+            var marker_1940ea7ccb03650db0bc4e077c962f66 = L.marker(
+                [27.19, 88.65],
+                {
+}
+            ).addTo(map_1c8ff2a99f4b5d85de590b05837273c3);
+        
+    
+            var icon_51c4a6e89dbceab6cc1f13f7cdb45214 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_229a6d32ed0aa324534628d7cbce41fe = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7b43d33e20324dd3dc6e890f9e694952 = $(`<div id="html_7b43d33e20324dd3dc6e890f9e694952" style="width: 100.0%; height: 100.0%;">         <b>Aritar</b><br>         Score: 0.527<br>         Crowd: low<br>         Themes: nature, cultural, offbeat, photography         </div>`)[0];
+                popup_229a6d32ed0aa324534628d7cbce41fe.setContent(html_7b43d33e20324dd3dc6e890f9e694952);
+            
+        
+
+        marker_1940ea7ccb03650db0bc4e077c962f66.bindPopup(popup_229a6d32ed0aa324534628d7cbce41fe)
+        ;
+
+        
+    
+    
+                marker_1940ea7ccb03650db0bc4e077c962f66.setIcon(icon_51c4a6e89dbceab6cc1f13f7cdb45214);
+            
+    
+            var poly_line_30a10cefa383bdffc53a617ac3388673 = L.polyline(
+                [[27.3, 88.63], [27.28, 88.56], [27.28, 88.15], [27.07, 88.82], [27.19, 88.65]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_1c8ff2a99f4b5d85de590b05837273c3);
+        
+    
+            map_1c8ff2a99f4b5d85de590b05837273c3.fitBounds(
+                [[27.3, 88.63], [27.28, 88.56], [27.28, 88.15], [27.07, 88.82], [27.19, 88.65]],
+                {}
+            );
+        
+</script>
+</html>

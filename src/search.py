@@ -1,10 +1,9 @@
 import faiss
 import pickle
-import numpy as np
 from sentence_transformers import SentenceTransformer
 from utils import haversine, filter_places
+from llm import extract_preferences, merge_preferences
 
-# Load everything once
 index = faiss.read_index("../index/sikkim_index.faiss")
 
 with open("../index/sikkim_data.pkl", "rb") as f:
@@ -17,8 +16,6 @@ model = SentenceTransformer("all-MiniLM-L6-v2")
 
 
 def hybrid_search(query, user_location, preferences, k=5):
-
-    # Step 1: Filter
     filtered = filter_places(metadatas, preferences)
 
     if not filtered:
@@ -26,7 +23,6 @@ def hybrid_search(query, user_location, preferences, k=5):
 
     filtered_indices = set(i for i, _ in filtered)
 
-    # Step 2: Query embedding
     query_emb = model.encode([query]).astype("float32")
     faiss.normalize_L2(query_emb)
 
@@ -35,83 +31,110 @@ def hybrid_search(query, user_location, preferences, k=5):
     results = []
 
     for score, idx in zip(scores[0], indices[0]):
-
         if idx not in filtered_indices:
             continue
 
         meta = metadatas[idx]
 
-        # -----------------------------
-        # GEO DISTANCE
-        # -----------------------------
         distance = haversine(
-            user_location[0], user_location[1],
-            meta["lat"], meta["lon"]
+            user_location[0],
+            user_location[1],
+            meta["lat"],
+            meta["lon"]
         )
 
-        distance_score = 1 / (1 + distance)  # closer = higher
+        distance_score = 1 / (1 + distance)
 
-        # -----------------------------
-        # THEME MATCH SCORE
-        # -----------------------------
         theme_score = 0
-        if "themes" in preferences:
+        if preferences.get("themes"):
             matches = len(set(preferences["themes"]) & set(meta["themes"]))
             theme_score = matches / len(preferences["themes"])
 
-        # -----------------------------
-        # CROWD SCORE (peacefulness)
-        # -----------------------------
         crowd_score = 0
-        if "crowd_level" in preferences:
+        if preferences.get("crowd_level"):
             crowd_score = 1 if meta["crowd_level"] == preferences["crowd_level"] else 0
 
-        # -----------------------------
-        # BONUS SIGNALS (smart tweaks)
-        # -----------------------------
         bonus = 0
-
-        # Boost offbeat places
         if "offbeat" in meta["themes"]:
             bonus += 0.05
-
-        # Penalize high crowd
         if meta["crowd_level"] == "high":
             bonus -= 0.05
 
-        # -----------------------------
-        # FINAL SCORE (balanced)
-        # -----------------------------
         final_score = (
-            score * 0.4 +           # semantic
-            distance_score * 0.2 +  # geo
-            theme_score * 0.25 +    # preference
-            crowd_score * 0.15 +    # strict match
-            bonus                   # small adjustments
+            score * 0.4 +
+            distance_score * 0.2 +
+            theme_score * 0.25 +
+            crowd_score * 0.15 +
+            bonus
         )
 
         results.append((final_score, meta))
 
-    # Step 3: Sort
     results.sort(reverse=True, key=lambda x: x[0])
-
     return results[:k]
 
 
-# 🔥 TEST BLOCK
 if __name__ == "__main__":
-    query = "peaceful offbeat places near Gangtok"
+    import folium
 
-    user_location = (27.33, 88.61)
+    query = "peaceful and famous places near Gangtok"
 
-    preferences = {
-        "themes": ["offbeat", "nature"],
-        "crowd_level": "low"
+    explicit = {
+        "themes": ["adventure"]
     }
 
-    results = hybrid_search(query, user_location, preferences)
+    implicit = extract_preferences(query)
+    final_prefs = merge_preferences(explicit, implicit)
+
+    user_location = (27.3389, 88.606)
+
+    results = hybrid_search(query, user_location, final_prefs)
 
     print("\nTop Recommendations:\n")
-
     for score, r in results:
-        print(f"{r['name']} ({r['region']}) → {round(score, 3)}")
+        print(f"{r['name']} → {round(score, 3)}")
+
+    m = folium.Map(
+        location=[27.33, 88.61],
+        zoom_start=10,
+        tiles="CartoDB positron"
+    )
+
+    coordinates = []
+
+    for i, (score, place) in enumerate(results):
+        lat = place["lat"]
+        lon = place["lon"]
+        name = place["name"]
+
+        coordinates.append([lat, lon])
+
+        if i == 0:
+            color = "green"
+        elif i < 3:
+            color = "blue"
+        else:
+            color = "red"
+
+        folium.Marker(
+            location=[lat, lon],
+            popup=f"""
+            <b>{name}</b><br>
+            Score: {round(score, 3)}<br>
+            Crowd: {place['crowd_level']}<br>
+            Themes: {", ".join(place['themes'])}
+            """,
+            icon=folium.Icon(color=color, icon="info-sign")
+        ).add_to(m)
+
+    if coordinates:
+        folium.PolyLine(
+            locations=coordinates,
+            color="purple",
+            weight=3,
+            opacity=0.7
+        ).add_to(m)
+        m.fit_bounds(coordinates)
+
+    m.save("../map.html")
+    print("✅ Upgraded map saved as map.html")

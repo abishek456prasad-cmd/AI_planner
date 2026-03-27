@@ -25,6 +25,7 @@ def filter_places(metadatas, preferences):
         if "crowd_level" in preferences:
             if meta["crowd_level"] != preferences["crowd_level"]:
                 continue
+                
 
         filtered.append((i, meta))
 
